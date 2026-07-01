@@ -15,12 +15,12 @@
         <profile>
             <id>eval</id>
             <properties>
-                <apigee.org>${APIGEE_ORG}</apigee.org>
-                <apigee.env>${APIGEE_ENV}</apigee.env>
-                <apigee.hosturl>https://apigee.googleapis.com</apigee.hosturl>
-                <apigee.apiversion>v1</apigee.apiversion>
-                <apigee.bearer>${APIGEE_TOKEN}</apigee.bearer>
-                <apigee.options>override</apigee.options>
+                <apigee.org>${org}</apigee.org>
+                <apigee.env>${env}</apigee.env>
+                <apigee.hosturl>${hosturl}</apigee.hosturl>
+                <apigee.apiversion>${apigeeAPIVersion}</apigee.apiversion>
+                <apigee.bearer>${bearer}</apigee.bearer>
+                <apigee.options>${options}</apigee.options>
             </properties>
         </profile>
     </profiles>
@@ -76,8 +76,7 @@
                 </executions>
             </plugin>
 
-            <!-- Step 3: Configure bundle (runs after zip is created) -->
-            <!-- Step 4: Deploy bundle -->
+            <!-- Step 3: Configure and Deploy -->
             <plugin>
                 <groupId>io.apigee.build-tools.enterprise4g</groupId>
                 <artifactId>apigee-edge-maven-plugin</artifactId>
