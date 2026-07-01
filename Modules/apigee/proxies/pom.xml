@@ -26,20 +26,12 @@
         </profile>
     </profiles>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>apigee-deploy-maven-plugin</id>
-            <name>Apigee Deploy Maven Plugin</name>
-            <url>https://raw.githubusercontent.com/apigee/apigee-deploy-maven-plugin/master/repo</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>io.apigee.build-tools.enterprise4g</groupId>
-                <artifactId>apigee-deploy-maven-plugin</artifactId>
-                <version>2.2.0</version>
+                <artifactId>apigee-edge-maven-plugin</artifactId>  <!-- ← FIXED -->
+                <version>2.5.2</version>                            <!-- ← FIXED -->
                 <executions>
                     <execution>
                         <id>deploy-demo-protected-api</id>
