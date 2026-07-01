@@ -35,6 +35,9 @@ jobs:
       - name: Build and Deploy Apigee Proxy
         run: |
           mvn clean install -Peval \
-            -DAPIGEE_ORG=${{ secrets.APIGEE_ORG }} \
-            -DAPIGEE_ENV=${{ secrets.APIGEE_ENV }} \
-            -DAPIGEE_TOKEN=${{ secrets.APIGEE_TOKEN }}
+            -Dorg=${{ secrets.APIGEE_ORG }} \
+            -Denv=${{ secrets.APIGEE_ENV }} \
+            -Dbearer=${{ secrets.APIGEE_TOKEN }} \
+            -Dhosturl=https://apigee.googleapis.com \
+            -DapigeeAPIVersion=v1 \
+            -Doptions=override
