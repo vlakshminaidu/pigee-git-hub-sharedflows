@@ -28,14 +28,14 @@
     <build>
         <plugins>
 
-            <!-- Step 1: Copy apiproxy folder into target -->
+            <!-- Step 1: Copy apiproxy into target directory -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <phase>process-resources</phase>
+                        <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -53,29 +53,31 @@
                 </executions>
             </plugin>
 
-            <!-- Step 2: Package into zip -->
+            <!-- Step 2: Zip the apiproxy folder -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
                 <executions>
                     <execution>
                         <id>create-zip</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>run</goal>
                         </goals>
                         <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>assembly.xml</descriptor>
-                            </descriptors>
+                            <target>
+                                <zip destfile="${basedir}/target/${project.artifactId}-${project.version}.zip"
+                                     basedir="${basedir}/target"
+                                     includes="apiproxy/**"/>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- Step 3: Configure and Deploy -->
+            <!-- Step 3: Configure bundle (runs after zip is created) -->
+            <!-- Step 4: Deploy bundle -->
             <plugin>
                 <groupId>io.apigee.build-tools.enterprise4g</groupId>
                 <artifactId>apigee-edge-maven-plugin</artifactId>
