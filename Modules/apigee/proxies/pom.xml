@@ -1,23 +1,56 @@
-<plugin>
-    <groupId>io.apigee.build-tools.enterprise4g</groupId>
-    <artifactId>apigee-deploy-maven-plugin</artifactId>
-    <version>2.4.4</version>   <!-- ← Change from 3.0.0 to 2.4.4 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <executions>
-        <execution>
-            <id>deploy-demo-protected-api</id>
-            <phase>install</phase>
-            <goals>
-                <goal>deploy</goal>
-            </goals>
-            <configuration>
-                <organization>${apigee.org}</organization>
-                <environment>${apigee.env}</environment>
-                <bearer>${apigee.token}</bearer>
-                <api>demo-protected-api</api>
-                <apiProxyDirectory>${project.basedir}/apiproxy</apiProxyDirectory>
-                <override>true</override>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example.apigee</groupId>
+    <artifactId>apigee-api-deployment</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <apigee.org>${env.APIGEE_ORG}</apigee.org>
+        <apigee.env>${env.APIGEE_ENV}</apigee.env>
+        <apigee.token>${env.APIGEE_TOKEN}</apigee.token>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>eval</id>
+            <properties>
+                <apigee.env>eval</apigee.env>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.apigee.build-tools.enterprise4g</groupId>
+                <artifactId>apigee-deploy-maven-plugin</artifactId>
+                <version>2.4.4</version>
+                <executions>
+                    <execution>
+                        <id>deploy-demo-protected-api</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                        <configuration>
+                            <organization>${apigee.org}</organization>
+                            <environment>${apigee.env}</environment>
+                            <bearer>${apigee.token}</bearer>
+                            <api>demo-protected-api</api>
+                            <apiProxyDirectory>${project.basedir}/apiproxy</apiProxyDirectory>
+                            <override>true</override>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
