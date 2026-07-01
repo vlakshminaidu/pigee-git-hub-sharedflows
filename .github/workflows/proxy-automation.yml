@@ -40,7 +40,5 @@ jobs:
           mvn clean install -Peval \
             -Dorg=${APIGEE_ORG} \
             -Denv=eval \
-            -Dapigee.bearer=${APIGEE_TOKEN} \
-            -Dhosturl=https://apigee.googleapis.com \
-            -DapigeeAPIVersion=v1 \
-            -Doptions=override
+            -Dbearer=${APIGEE_TOKEN} \
+            -Dapigee.options=override
