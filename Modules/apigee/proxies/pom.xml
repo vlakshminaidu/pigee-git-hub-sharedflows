@@ -45,7 +45,7 @@
                             <resources>
                                 <resource>
                                     <directory>apiproxy</directory>
-                                    <filtering>true</filtering>
+                                    <filtering>false</filtering>
                                 </resource>
                             </resources>
                         </configuration>
@@ -67,9 +67,11 @@
                         </goals>
                         <configuration>
                             <target>
-                                <zip destfile="${basedir}/target/${project.artifactId}-${project.version}.zip"
-                                     basedir="${basedir}/target"
-                                     includes="apiproxy/**"/>
+                                <!-- zip must contain apiproxy/ at root -->
+                                <zip destfile="${basedir}/target/${project.artifactId}-${project.version}.zip">
+                                    <zipfileset dir="${basedir}/target/apiproxy"
+                                                prefix="apiproxy"/>
+                                </zip>
                             </target>
                         </configuration>
                     </execution>
@@ -80,7 +82,7 @@
             <plugin>
                 <groupId>io.apigee.build-tools.enterprise4g</groupId>
                 <artifactId>apigee-edge-maven-plugin</artifactId>
-                <version>2.5.2</version>
+                <version>2.4.0</version>
                 <executions>
                     <execution>
                         <id>configure-bundle</id>
