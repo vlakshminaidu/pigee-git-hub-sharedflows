@@ -35,7 +35,7 @@ jobs:
       - name: Build and Deploy Apigee Proxy
         run: |
           mvn clean install -Peval \
-            -Dorg=apt-advantage-495505-k1 \
+            -Dorg=internship-439613 \
             -Denv=eval \
             -Dbearer="ya29.a0AT3oNZ8LgaGERqg7uo6iPvyCUxKS0VMQiJI-FFzp-wWpJyVf8VN0rU3VJJfTTyC-oDW6cCCJCkn9khxPPCaUEtBrUn5isPUaj5Ho6g8jwA2ZSPzQmUs_KK-aPuwbz9IOAkm4Pw4WIyd4OoLI9aWaaemyn6Y3_CnH19xHt1h6M6ccnFUl9MeTiMWzfCg2JSyoWONqnklXyIG7aCgYKAfYSARISFQHGX2Miptij0rxhbchBDzkaYDxZow0211" \
             -Dapigee.options=override
