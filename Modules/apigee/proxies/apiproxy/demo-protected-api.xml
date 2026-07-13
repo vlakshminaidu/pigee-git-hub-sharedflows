@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="demo-protected-api">
+  <DisplayName/>
+  <Description/>
+  <CreatedAt>1782446194198</CreatedAt>
+  <LastModifiedAt>1782446194198</LastModifiedAt>
+  <BasePaths>/v1/demo-api</BasePaths>
+  <Policies>
+    <Policy>FC-SpikeArrest</Policy>
+    <Policy>FC-RaiseFault</Policy>
+    <Policy>VerifyOAuthToken</Policy>
+  </Policies>
+  <ProxyEndpoints>
+    <ProxyEndpoint>default</ProxyEndpoint>
+  </ProxyEndpoints>
+  <TargetEndpoints>
+    <TargetEndpoint>default</TargetEndpoint>
+  </TargetEndpoints>
+</APIProxy>

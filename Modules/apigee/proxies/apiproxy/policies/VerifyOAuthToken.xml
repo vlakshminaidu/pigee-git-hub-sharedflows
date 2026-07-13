@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 continueOnError="false" enabled="true" name="VerifyOAuthToken">
+  <DisplayName>Verify OAuth Token</DisplayName>
+  <Operation>VerifyAccessToken</Operation>
+  <TokenType>header</TokenType>
+</OAuthV2>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+  <FaultRules>
+    <!-- No token / wrong token / expired token → 401 -->
+    <FaultRule name="OAuthFault">
+      <Condition>(fault.name = "InvalidAccessToken")
+                    OR (fault.name = "AccessTokenExpired")
+                    OR (fault.name = "FailedToResolveAccessToken")
+                    OR (fault.name = "InvalidTokenType")
+                    OR (fault.name = "InvalidAPICallAsNoApiProductMatchFound")</Condition>
+      <Step>
+        <Name>FC-RaiseFault</Name>
+      </Step>
+    </FaultRule>
+    <!-- More than 3 requests per second → 429 -->
+    <FaultRule name="SpikeArrestFault">
+      <Condition>(fault.name = "SpikeArrestViolation")</Condition>
+      <Step>
+        <Name>FC-RaiseFault</Name>
+      </Step>
+    </FaultRule>
+    <!-- Any other error → 500 -->
+    <FaultRule name="GeneralFault">
+      <Step>
+        <Name>FC-RaiseFault</Name>
+      </Step>
+    </FaultRule>
+  </FaultRules>
+  <DefaultFaultRule name="DefaultFault">
+    <Step>
+      <Name>FC-RaiseFault</Name>
+    </Step>
+    <AlwaysEnforce>false</AlwaysEnforce>
+  </DefaultFaultRule>
+  <HTTPProxyConnection>
+    <BasePath>/v1/demo-api</BasePath>
+    <VirtualHost>secure</VirtualHost>
+  </HTTPProxyConnection>
+  <PreFlow name="PreFlow">
+    <Request>
+      <!-- Step 1: Rate limit → calls sf-spikearrest -->
+      <Step>
+        <Name>FC-SpikeArrest</Name>
+      </Step>
+      <!-- Step 2: Verify OAuth token from your token API -->
+      <Step>
+        <Name>VerifyOAuthToken</Name>
+      </Step>
+    </Request>
+    <Response/>
+  </PreFlow>
+  <Flows>
+    <Flow name="GetItems">
+      <Description>GET /items</Description>
+      <Condition>(proxy.pathsuffix MatchesPath "/items") and (request.verb = "GET")</Condition>
+      <Request/>
+      <Response/>
+    </Flow>
+    <Flow name="PostItem">
+      <Description>POST /items</Description>
+      <Condition>(proxy.pathsuffix MatchesPath "/items") and (request.verb = "POST")</Condition>
+      <Request/>
+      <Response/>
+    </Flow>
+  </Flows>
+  <PostFlow name="PostFlow">
+    <Request/>
+    <Response/>
+  </PostFlow>
+  <RouteRule name="default">
+    <TargetEndpoint>default</TargetEndpoint>
+  </RouteRule>
+</ProxyEndpoint>
