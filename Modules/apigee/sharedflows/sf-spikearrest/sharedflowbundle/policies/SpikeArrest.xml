@@ -2,7 +2,7 @@
 <SpikeArrest continueOnError="false" enabled="true" name="SpikeArrest">
   <DisplayName>SA- SpikeArrest</DisplayName>
   <!-- 1 request per minute for easy testing -->
-  <Rate>1pm</Rate>
+  <Rate>6ph</Rate>
   <!-- Identify by client IP address -->
   <Identifier ref="client.ip"/>
 </SpikeArrest>
