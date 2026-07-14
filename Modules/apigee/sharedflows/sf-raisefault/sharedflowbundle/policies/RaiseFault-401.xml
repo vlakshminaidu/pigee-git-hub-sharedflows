@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault continueOnError="false" enabled="true" name="RaiseFault-401">
+  <DisplayName>Raise Fault 401</DisplayName>
+  <FaultResponse>
+    <Set>
+      <StatusCode>401</StatusCode>
+      <ReasonPhrase>Unauthorized</ReasonPhrase>
+      <Headers>
+        <Header name="Content-Type">application/json</Header>
+        <Header name="WWW-Authenticate">Bearer realm="apigee", error="invalid_token"</Header>
+      </Headers>
+      <Payload contentType="application/json">{
+  "error": {
+    "code": 401,
+    "status": "UNAUTHORIZED",
+    "message": "Invalid or missing OAuth 2.0 token. Pass a valid Bearer token in Authorization header.",
+    "details": {
+      "reason": "{fault.name}"
+    }
+  }
+}</Payload>
+    </Set>
+  </FaultResponse>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>
