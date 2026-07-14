@@ -1,1 +1,15 @@
-
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SharedFlowBundle revision="1" name="SF-raisefault">
+  <DisplayName/>
+  <Description>Centralised error handling shared flow</Description>
+  <Policies>
+    <Policy>RaiseFault-401</Policy>
+    <Policy>RaiseFault-429</Policy>
+    <Policy>RaiseFault-400</Policy>
+    <Policy>RaiseFault-500</Policy>
+  </Policies>
+  <SharedFlows>
+    <SharedFlow>default</SharedFlow>
+  </SharedFlows>
+  <subType>SharedFlow</subType>
+</SharedFlowBundle>
