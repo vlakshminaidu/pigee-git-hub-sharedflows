@@ -31,14 +31,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
-      - name: Authenticate to GCP
-        id: auth
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: '${{ secrets.APIGEE_SA_KEY }}'
-          token_format: 'access_token'
-
       - name: Deploy Shared Flow - Spike Arrest
         working-directory: Modules/apigee/sharedflows/sf-spikearrest
         run: |
@@ -47,7 +39,6 @@ jobs:
             -Denv=eval \
             -Dbearer="ya29.a0ARGnu0b5YMHOl8MUKUvTo18BTXYfRVsgYwYcb0jEN6yYgfP-GtdW63e_PQhhlQlrg022Qvv0ikbQG7Ru19LFfVfgPAnskwlVbuk8FRTlKFAnn6CVBLCcaOPFFMx_o2n9qhEWmz0Yy-OIJwCIIxqTQPyCkvvEGeW-_FGZtBgdYwl6g_oYT-tu1ZSv80vGKkNo7fvXmF8LEa2p4SfXx8RFyufM2kxXcQoucuZ4b8ZTBZoLdnQIUC17083URvHx9a4uKlei5u2fIRWCJhx79QkGMtDcG_Q4-3onUMZrJeCmZ_Yvp4c8iyOnJcy9KLZhBTjVTaGeNRqi1EAUsxngwVhMcOc1-HgfVcmO57L28TgaCgYKAdsSARESFQHGX2MivTzUS8D1tO06YjgF5lclvA0366" \
             -Dapigee.options=override
-
       - name: Deploy Shared Flow - Raise Fault
         working-directory: Modules/apigee/sharedflows/sf-raisefault
         run: |
@@ -56,7 +47,6 @@ jobs:
             -Denv=eval \
             -Dbearer="ya29.a0ARGnu0b5YMHOl8MUKUvTo18BTXYfRVsgYwYcb0jEN6yYgfP-GtdW63e_PQhhlQlrg022Qvv0ikbQG7Ru19LFfVfgPAnskwlVbuk8FRTlKFAnn6CVBLCcaOPFFMx_o2n9qhEWmz0Yy-OIJwCIIxqTQPyCkvvEGeW-_FGZtBgdYwl6g_oYT-tu1ZSv80vGKkNo7fvXmF8LEa2p4SfXx8RFyufM2kxXcQoucuZ4b8ZTBZoLdnQIUC17083URvHx9a4uKlei5u2fIRWCJhx79QkGMtDcG_Q4-3onUMZrJeCmZ_Yvp4c8iyOnJcy9KLZhBTjVTaGeNRqi1EAUsxngwVhMcOc1-HgfVcmO57L28TgaCgYKAdsSARESFQHGX2MivTzUS8D1tO06YjgF5lclvA0366" \
             -Dapigee.options=override
-
       - name: Build and Deploy Apigee Proxy
         run: |
           mvn clean install -Peval \
